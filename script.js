@@ -490,55 +490,91 @@ window.hideHome = function hideHome() {
 const scenes = {
 
   // ============================================================
-  // 1 — PLAIN YOUTUBE VIDEO + CHOICES
+  // SAN FRANCISCO / MADRID
+  // WEEK 1 — "BUILD MORE... BUT CAN YOU?"
+  //
+  // LEVEL:
+  // C1 moving toward C2
+  //
+  // LANGUAGE TARGETS:
+  // • Professional real-estate vocabulary
+  // • Prepositions and real-estate collocations
+  // • Gerund phrases as subjects / complements
+  // • Hedging and qualified investment language
+  // • Planning / zoning / viability language
+  //
+  // MEDIA:
+  // • Vox — How the US made affordable homes illegal
+  // • San Francisco Chronicle — Family Zoning / development uptake
+  //
+  // QA RULES APPLIED:
+  // • Scramble order never matches target order.
+  // • MC options use shuffleOptions where supported.
+  // • Authored correct MC positions also vary.
+  // • Multi-question low score cannot simply advance.
+  // • Fill-in answers are unique and option order differs
+  //   from target answer order.
+  // • Grammar Run questions shuffle.
+  // • Grammar Run hint answer positions vary.
+  // • Branching professional choices are NOT treated as
+  //   right/wrong questions.
+  // ============================================================
+
+
+  // ============================================================
+  // 1 — OPENING / TRIP DEBRIEF
   // ============================================================
 
   scene1: {
     type: "text",
 
-  text: "Read the article before continuing.",
+    text:
+      "SAN FRANCISCO — BUILD MORE... BUT CAN YOU?\n\n" +
+      "You’ve just come back from California.\n\n" +
+      "Before looking at the property market, think about the city itself.\n\n" +
+      "Discuss:\n" +
+      "• What surprised you most about San Francisco?\n" +
+      "• Did the city feel denser or less dense than you expected?\n" +
+      "• Did any areas look surprisingly low-rise for such an expensive city?\n" +
+      "• From a land-acquisition perspective, did anything make you think: “Why hasn’t more been built here?”",
 
-  choices: [
-    {
-      text: "Open article",
-      url: "https://www.bbc.com/news/live/cqevw9y34y34t"
-    },
-    {
-      text: "Continue",
-      next: "scene2"
-    }
-  ]
-},
-
+    choices: [
+      {
+        text: "Enter the market",
+        next: "scene2"
+      }
+    ]
+  },
 
 
   // ============================================================
-  // 2 — YOUTUBE + SCRAMBLE
+  // 2 — PRE-VIDEO SCRAMBLE
+  //
+  // SCRAMBLE ORDER:
+  // Deliberately different from target.
   // ============================================================
 
   scene2: {
-    type: "video-scramble",
+    type: "scramble",
 
-    youtube: "M7lc1UVf-VE",
+    disableSpeech: true,
 
-    text: "Watch the clip, then reconstruct the sentence.",
+    text:
+      "Your US investment team sends you one sentence before the briefing.\n\n" +
+      "Reconstruct it:",
 
     scramble: [
-      "The",
-      "system",
-      "appears",
-      "to",
-      "be",
-      "working"
+      "has historically been constrained",
+      "by zoning restrictions.",
+      "Housing supply",
+      "in some high-demand areas"
     ],
 
     correct: [
-      "The",
-      "system",
-      "appears",
-      "to",
-      "be",
-      "working"
+      "Housing supply",
+      "in some high-demand areas",
+      "has historically been constrained",
+      "by zoning restrictions."
     ],
 
     next: "scene3"
@@ -546,18 +582,22 @@ const scenes = {
 
 
   // ============================================================
-  // 3 — NORMAL TEXT CHECKPOINT
-  // Useful for testing Back in both directions
+  // 3 — PRE-VIDEO CONVERSATION
   // ============================================================
 
   scene3: {
     type: "text",
 
-    text: "Scramble complete. Continue to the fill-in-the-blank challenge.",
+    text:
+      "Before watching the briefing, make a prediction.\n\n" +
+      "An international investor asks:\n\n" +
+      "“If demand is extremely high and prices are extremely high, why doesn’t the market simply build more housing?”\n\n" +
+      "Give two possible explanations.\n\n" +
+      "Then watch the video and see which explanation comes closest.",
 
     choices: [
       {
-        text: "Continue",
+        text: "Watch the briefing",
         next: "scene4"
       }
     ]
@@ -565,144 +605,246 @@ const scenes = {
 
 
   // ============================================================
-  // 4 — YOUTUBE + FILL IN THE BLANK
-  // Video should REMAIN visible after challenge appears
+  // 4 — VOX VIDEO + MULTI-QUESTION
+  //
+  // IMPORTANT:
+  // • Runtime option shuffle enabled.
+  // • Authored correct indices vary: 2 / 0 / 1 / 2.
+  // • 3/4 needed to advance.
+  // • Low score routes to retry.
   // ============================================================
 
   scene4: {
-    type: "video-fill-in-the-blank",
-
-    youtube: "M7lc1UVf-VE",
-
-    text: "Watch the video and complete the sentence.",
-
-    sentence: [
-      "The",
-      "YouTube",
-      "player",
-      "___",
-      "the",
-      "existing",
-      "challenge",
-      "system."
-    ],
-
-    blanks: [
-      3
-    ],
-
-    options: [
-      "works with",
-      "working with",
-      "work with"
-    ],
-
-    correct: [
-      "works with"
-    ],
-
-    next: "scene5"
-  },
-
-
-  // ============================================================
-  // 5 — NORMAL TEXT CHECKPOINT
-  // ============================================================
-
-  scene5: {
-    type: "text",
-
-    text: "Fill-in-the-blank complete. Next is a multi-question challenge with NO timer.",
-
-    choices: [
-      {
-        text: "Continue",
-        next: "scene6"
-      }
-    ]
-  },
-
-
-  // ============================================================
-  // 6 — YOUTUBE MULTI-QUESTION — NO TIMER
-  //
-  // IMPORTANT:
-  // No timer property appears anywhere here.
-  // After our loader change this should mean NO countdown.
-  // ============================================================
-
-  scene6: {
     type: "video-multi-question",
 
-    youtube: "M7lc1UVf-VE",
+    youtube: "0Flsg_mzG-M",
 
-    text: "Watch the video, then answer the questions.",
+    text:
+      "Watch the Vox briefing.\n\n" +
+      "Imagine that you are assessing the US market for a European investor.\n\n" +
+      "Focus less on memorising facts and more on identifying what could affect the development potential of land.",
 
     shuffleOptions: true,
 
     questions: [
+
       {
-        text: "Which media system is being tested?",
+        text:
+          "Which interpretation comes closest to the video's central argument?",
 
         options: [
-          "Audio-only playback",
-          "YouTube playback",
-          "Image preloading"
+          "Construction costs alone explain the shortage of affordable housing.",
+          "Developers generally prefer keeping valuable urban land undeveloped.",
+          "Restrictions on what can be built can limit housing supply.",
+          "High-density housing normally reduces surrounding property values."
         ],
 
-        correct: 1
+        correct: 2
       },
 
       {
-        text: "What remains available while the questions are displayed?",
+        text:
+          "From an acquisition perspective, why can zoning matter before a site is purchased?",
 
         options: [
-          "The YouTube player",
-          "Only the timer",
-          "Only the answer buttons"
+          "Because permitted use and density can affect the site's development potential.",
+          "Because zoning automatically determines the future sale price.",
+          "Because land cannot legally change ownership without rezoning.",
+          "Because developers must normally build the maximum permitted density."
         ],
 
         correct: 0
       },
 
       {
-        text: "What can the learner do if they need to check the clip again?",
+        text:
+          "Which statement is the most professionally cautious?",
 
         options: [
-          "Restart the entire game",
-          "Replay the video",
-          "Reload the JavaScript"
+          "Rezoning guarantees that more housing will be constructed.",
+          "Higher permitted density may improve a site's development potential.",
+          "Removing restrictions makes every residential scheme financially viable.",
+          "Density always increases an investor's return."
         ],
 
         correct: 1
+      },
+
+      {
+        text:
+          "Which expression best describes rules limiting the type or density of housing that may be developed?",
+
+        options: [
+          "acquisition yield",
+          "construction leverage",
+          "exclusionary zoning",
+          "portfolio absorption"
+        ],
+
+        correct: 2
       }
     ],
 
     scoring: {
-      high: 3,
-      medium: 2
+      high: 4,
+      medium: 3
     },
 
     endings: {
-      high: "scene7",
-      medium: "scene7",
-      low: "scene7"
+      high: "scene5",
+      medium: "scene5",
+      low: "scene4_retry"
     }
   },
 
 
   // ============================================================
-  // 7 — CHECKPOINT
+  // 4B — VIDEO RETRY
+  // ============================================================
+
+  scene4_retry: {
+    type: "text",
+
+    text:
+      "Not quite enough evidence yet.\n\n" +
+      "Replay the briefing and concentrate on the relationship between zoning, permitted density and housing supply.\n\n" +
+      "You need at least three correct answers to clear the briefing.",
+
+    choices: [
+      {
+        text: "Replay briefing",
+        next: "scene4"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 5 — VIDEO + PREPOSITION FILL
+  //
+  // TARGET ANSWERS:
+  // for / on / over
+  //
+  // OPTION ORDER:
+  // over / for / on
+  //
+  // All three answers are UNIQUE.
+  // ============================================================
+
+  scene5: {
+    type: "video-fill-in-the-blank",
+
+    youtube: "0Flsg_mzG-M",
+
+    text:
+      "Keep the briefing available.\n\n" +
+      "Complete the investment-team sentence.",
+
+    sentence: [
+      "Demand",
+      "___",
+      "housing,",
+      "restrictions",
+      "___",
+      "density,",
+      "and",
+      "uncertainty",
+      "___",
+      "future",
+      "costs",
+      "can",
+      "all",
+      "affect",
+      "project",
+      "viability."
+    ],
+
+    blanks: [
+      1,
+      4,
+      8
+    ],
+
+    options: [
+      "over",
+      "for",
+      "on"
+    ],
+
+    correct: [
+      "for",
+      "on",
+      "over"
+    ],
+
+    next: "scene6"
+  },
+
+
+  // ============================================================
+  // 6 — GERUND SUBJECT SCRAMBLE
+  //
+  // Target:
+  // Securing planning certainty before acquisition can make
+  // valuing a site considerably more reliable.
+  // ============================================================
+
+  scene6: {
+    type: "scramble",
+
+    disableSpeech: true,
+
+    text:
+      "The investment committee wants a more precise formulation.\n\n" +
+      "Reconstruct the sentence:",
+
+    scramble: [
+      "considerably more reliable.",
+      "before acquisition",
+      "valuing a site",
+      "Securing planning certainty",
+      "can make"
+    ],
+
+    correct: [
+      "Securing planning certainty",
+      "before acquisition",
+      "can make",
+      "valuing a site",
+      "considerably more reliable."
+    ],
+
+    next: "scene7"
+  },
+
+
+  // ============================================================
+  // 7 — MADRID COMPARISON
   // ============================================================
 
   scene7: {
     type: "text",
 
-    text: "Untimed multi-question complete. The next version uses a scene-level timer.",
+    text:
+      "SAN FRANCISCO → MADRID\n\n" +
+      "Now leave the video behind for a moment.\n\n" +
+      "Imagine an investor gives you €80 million and says:\n\n" +
+      "“Find me a residential development opportunity — Madrid or San Francisco.”\n\n" +
+      "What would you want to know BEFORE acquiring the land?\n\n" +
+      "Try to work naturally with some of these ideas:\n" +
+      "• permitted density\n" +
+      "• planning certainty\n" +
+      "• acquisition price\n" +
+      "• financing costs\n" +
+      "• neighbourhood opposition\n" +
+      "• expected demand\n" +
+      "• construction costs\n" +
+      "• exit strategy\n" +
+      "• time to approval",
 
     choices: [
       {
-        text: "Test timed multi-question",
+        text: "See what San Francisco changed",
         next: "scene8"
       }
     ]
@@ -710,85 +852,51 @@ const scenes = {
 
 
   // ============================================================
-  // 8 — YOUTUBE MULTI-QUESTION — TIMER ON EVERY QUESTION
-  //
-  // timer: 20 means 20 seconds per question unless overridden.
+  // 8 — ARTICLE
   // ============================================================
 
   scene8: {
-    type: "video-multi-question",
+    type: "text",
 
-    youtube: "M7lc1UVf-VE",
+    text:
+      "MARKET UPDATE — SAN FRANCISCO, 2026\n\n" +
+      "San Francisco has now changed part of the equation.\n\n" +
+      "Open the article and scan it rather than reading every line carefully.\n\n" +
+      "MISSION:\n" +
+      "Find evidence for this apparent contradiction:\n\n" +
+      "“The city has allowed greater height and density — but developers have not immediately rushed to build.”\n\n" +
+      "Be ready to identify at least TWO reasons why.",
 
-    text: "This version tests the optional timer.",
-
-    timer: 20,
-
-    shuffleOptions: true,
-
-    questions: [
+    choices: [
       {
-        text: "How much time should this question provide?",
-
-        options: [
-          "20 seconds",
-          "15 seconds",
-          "No timer"
-        ],
-
-        correct: 0
+        text: "Open SF Chronicle article",
+        url: "https://www.sfchronicle.com/sf/article/housing-family-zoning-22378281.php"
       },
-
       {
-        text: "Where is the default timer for this challenge defined?",
-
-        options: [
-          "At scene level",
-          "Inside the YouTube URL",
-          "Inside the CSS"
-        ],
-
-        correct: 0
-      },
-
-      {
-        text: "Can an individual question override the scene timer?",
-
-        options: [
-          "No",
-          "Yes",
-          "Only for MP4 video"
-        ],
-
-        correct: 1
+        text: "I have enough evidence",
+        next: "scene9"
       }
-    ],
-
-    scoring: {
-      high: 3,
-      medium: 2
-    },
-
-    endings: {
-      high: "scene9",
-      medium: "scene9",
-      low: "scene9"
-    }
+    ]
   },
 
 
   // ============================================================
-  // 9 — CHECKPOINT
+  // 9 — ARTICLE DEBRIEF
   // ============================================================
 
   scene9: {
     type: "text",
 
-    text: "Scene-level timer test complete. Next we test individual timer overrides.",
+    text:
+      "ARTICLE DEBRIEF\n\n" +
+      "Explain the apparent contradiction in your own words:\n\n" +
+      "Why might allowing taller or denser buildings NOT immediately result in development?\n\n" +
+      "Then consider Madrid:\n\n" +
+      "Would changing planning regulations be enough on its own to make a previously unattractive site investable?",
 
     choices: [
       {
-        text: "Continue",
+        text: "Test the investment language",
         next: "scene10"
       }
     ]
@@ -796,121 +904,555 @@ const scenes = {
 
 
   // ============================================================
-  // 10 — MIXED TIMER BEHAVIOUR
-  //
-  // Scene default = 20 sec
-  // Q1 = uses 20 sec
-  // Q2 = overridden to 40 sec
-  // Q3 = timer explicitly disabled
+  // 10 — PROFESSIONAL HEDGING SCRAMBLE
   // ============================================================
 
   scene10: {
-    type: "video-multi-question",
+    type: "scramble",
 
-    youtube: "M7lc1UVf-VE",
+    disableSpeech: true,
 
-    text: "This challenge tests per-question timer overrides.",
+    text:
+      "A junior analyst writes:\n\n" +
+      "“The rezoning makes these sites profitable.”\n\n" +
+      "That is too absolute for an investment committee.\n\n" +
+      "Reconstruct the more defensible version:",
 
-    timer: 20,
-
-    questions: [
-      {
-        text: "This question should inherit the 20-second scene timer.",
-
-        options: [
-          "Correct",
-          "Incorrect"
-        ],
-
-        correct: 0
-      },
-
-      {
-        text: "This question should provide 40 seconds.",
-
-        timer: 40,
-
-        options: [
-          "40 seconds",
-          "20 seconds",
-          "No timer"
-        ],
-
-        correct: 0
-      },
-
-      {
-        text: "This question should have no countdown at all.",
-
-        timer: false,
-
-        options: [
-          "Timed",
-          "Untimed"
-        ],
-
-        correct: 1
-      }
+    scramble: [
+      "make them financially viable.",
+      "of certain sites,",
+      "although this does not necessarily",
+      "Allowing greater density",
+      "may improve the development potential"
     ],
 
-    scoring: {
-      high: 3,
-      medium: 2
-    },
+    correct: [
+      "Allowing greater density",
+      "may improve the development potential",
+      "of certain sites,",
+      "although this does not necessarily",
+      "make them financially viable."
+    ],
 
-    endings: {
-      high: "scene11",
-      medium: "scene11",
-      low: "scene11"
-    }
+    next: "scene11"
   },
 
 
   // ============================================================
-  // 11 — FINAL BACK-NAVIGATION TEST
+  // 11 — PROFESSIONAL COLLOCATION SCRAMBLE
   // ============================================================
 
   scene11: {
+    type: "scramble",
+
+    disableSpeech: true,
+
+    text:
+      "Your investment memo needs one more sentence.\n\n" +
+      "Reconstruct it:",
+
+    scramble: [
+      "the viability of the scheme.",
+      "financing costs",
+      "when assessing",
+      "Investors must account for",
+      "and uncertainty over future demand"
+    ],
+
+    correct: [
+      "Investors must account for",
+      "financing costs",
+      "and uncertainty over future demand",
+      "when assessing",
+      "the viability of the scheme."
+    ],
+
+    next: "scene12"
+  },
+
+
+  // ============================================================
+  // 12 — FICTIONAL ACQUISITION CASE
+  //
+  // NOTE:
+  // This is a professional branch, not an MC knowledge test.
+  // There is deliberately no "correct" answer.
+  // ============================================================
+
+  scene12: {
     type: "text",
 
-    text: "All current YouTube challenge tests are complete. Use the Back button repeatedly now to test navigation through the previous scenes.",
+    text:
+      "THE SITE — INNER RICHMOND, SAN FRANCISCO\n\n" +
+      "A local intermediary brings you an off-market opportunity.\n\n" +
+      "Existing asset:\n" +
+      "• Two-storey residential building\n" +
+      "• Under-used plot\n\n" +
+      "Current situation:\n" +
+      "• New zoning permits substantially greater density\n" +
+      "• Strong residential demand\n" +
+      "• High acquisition price\n" +
+      "• Construction costs remain elevated\n" +
+      "• Some neighbourhood opposition is expected\n" +
+      "• The planning environment has recently become more favourable\n\n" +
+      "Your investment committee wants an initial recommendation.\n\n" +
+      "What do you do?",
 
     choices: [
       {
-        text: "Finish",
-        next: "scene12"
+        text: "Proceed toward acquisition",
+        next: "scene13_proceed"
+      },
+      {
+        text: "Negotiate before committing",
+        next: "scene13_negotiate"
+      },
+      {
+        text: "Walk away",
+        next: "scene13_walk"
       }
     ]
   },
 
-  scene12: {
-  type: "text",
-
-  text: "Read the article before continuing.",
-
-  choices: [
-    {
-      text: "Open article",
-      url: "https://www.youtube.com/"
-    },
-    {
-      text: "Continue",
-      next: "thank_you_scene"
-    }
-  ]
-},
-
 
   // ============================================================
-  // FINAL
+  // 13A — PROCEED
   // ============================================================
 
-  thank_you_scene: {
+  scene13_proceed: {
     type: "text",
 
-    text: "Test complete.",
+    text:
+      "YOU PROCEED.\n\n" +
+      "The committee pushes back:\n\n" +
+      "“Greater density is attractive, but why are you comfortable taking on planning and construction risk at this acquisition price?”\n\n" +
+      "Defend the decision without claiming that the project is guaranteed to succeed.\n\n" +
+      "Try using:\n" +
+      "• may / could / appears to\n" +
+      "• subject to\n" +
+      "• provided that\n" +
+      "• the viability of\n" +
+      "• securing / obtaining / developing",
 
-    endOfCourse: true
+    choices: [
+      {
+        text: "Present the Madrid comparison",
+        next: "scene14"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 13B — NEGOTIATE
+  // ============================================================
+
+  scene13_negotiate: {
+    type: "text",
+
+    text:
+      "YOU NEGOTIATE.\n\n" +
+      "The seller asks:\n\n" +
+      "“The zoning upside is already reflected in the price. Why should we move?”\n\n" +
+      "Explain which risks you believe should still be reflected in the acquisition price.\n\n" +
+      "Try to distinguish between:\n" +
+      "• theoretical development potential\n" +
+      "• planning certainty\n" +
+      "• financial viability\n" +
+      "• execution risk",
+
+    choices: [
+      {
+        text: "Present the Madrid comparison",
+        next: "scene14"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 13C — WALK AWAY
+  // ============================================================
+
+  scene13_walk: {
+    type: "text",
+
+    text:
+      "YOU WALK AWAY.\n\n" +
+      "The investment director challenges you:\n\n" +
+      "“Are we rejecting the site because the fundamentals are weak, or because the current price fails to compensate us adequately for the risk?”\n\n" +
+      "Explain the distinction.\n\n" +
+      "Avoid simply saying that the deal is “too risky.”",
+
+    choices: [
+      {
+        text: "Present the Madrid comparison",
+        next: "scene14"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 14 — MADRID REVERSAL
+  // ============================================================
+
+  scene14: {
+    type: "text",
+
+    text:
+      "THE REVERSAL\n\n" +
+      "A US investor now asks YOU to explain Madrid.\n\n" +
+      "Give them:\n\n" +
+      "1. One important similarity between Madrid and San Francisco.\n" +
+      "2. One important difference.\n" +
+      "3. One risk a foreign investor might underestimate in Madrid.\n" +
+      "4. One aspect of Madrid that might make acquisition comparatively attractive.\n\n" +
+      "Useful high-level frames:\n\n" +
+      "• What distinguishes Madrid from San Francisco is...\n" +
+      "• Whereas San Francisco..., Madrid tends to...\n" +
+      "• The issue lies not so much in X as in Y.\n" +
+      "• Acquiring the site would only make sense if...\n" +
+      "• Being able to build more does not necessarily imply...",
+
+    choices: [
+      {
+        text: "Final language upgrade",
+        next: "scene15"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 15 — FINAL PRE-RUN UPGRADE
+  // ============================================================
+
+  scene15: {
+    type: "scramble",
+
+    disableSpeech: true,
+
+    text:
+      "One last investment-committee sentence.\n\n" +
+      "Reconstruct the upgraded version:",
+
+    scramble: [
+      "financing conditions and expected returns.",
+      "Allowing greater density",
+      "will depend on acquisition costs,",
+      "although its ultimate viability",
+      "may encourage additional development,"
+    ],
+
+    correct: [
+      "Allowing greater density",
+      "may encourage additional development,",
+      "although its ultimate viability",
+      "will depend on acquisition costs,",
+      "financing conditions and expected returns."
+    ],
+
+    next: "scene16_grammar_intro"
+  },
+
+
+  // ============================================================
+  // 16 — GRAMMAR RUN INTRO
+  // ============================================================
+
+  scene16_grammar_intro: {
+    type: "text",
+
+    text:
+      "10-SECOND GRAMMAR RUN — SAN FRANCISCO\n\n" +
+      "You’ve discussed the city, zoning, acquisition risk and development viability.\n\n" +
+      "Now react quickly.\n\n" +
+      "You have 10 seconds per item.\n" +
+      "Type the exact missing word.\n\n" +
+      "The questions appear in random order.",
+
+    choices: [
+      {
+        text: "Start the 10-second run",
+        next: "scene16_grammar_run"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 17 — 10-SECOND GRAMMAR RUN
+  //
+  // shuffle: true → prompt order randomized
+  //
+  // Correct position inside visible hints:
+  //
+  // Q1  middle
+  // Q2  last
+  // Q3  first
+  // Q4  middle
+  // Q5  last
+  // Q6  first
+  // Q7  last
+  // Q8  middle
+  // Q9  first
+  // Q10 middle
+  //
+  // Pattern deliberately irregular across future builds.
+  // ============================================================
+
+  scene16_grammar_run: {
+    type: "conjugation-race",
+
+    text:
+      "Timed recap: type the exact word that completes each professional real-estate sentence.\n" +
+      "Hints show three possibilities.",
+
+    timerPer: 10,
+
+    shuffle: true,
+
+    showAnswerOnWrong: true,
+
+    caseInsensitive: true,
+
+    acceptPunctuationVariants: true,
+
+    suppressHub: true,
+
+    scoring: {
+      high: 9,
+      medium: 7
+    },
+
+    endings: {
+      high: "scene17_high",
+      medium: "scene17_medium",
+      low: "scene17_retry"
+    },
+
+    questions: [
+
+      {
+        prompt:
+          "Restrictions ________ residential density can affect development potential.",
+
+        answers: [
+          "on"
+        ],
+
+        hint:
+          "(for / on / of)"
+      },
+
+      {
+        prompt:
+          "Investors need to account ________ financing costs before committing.",
+
+        answers: [
+          "for"
+        ],
+
+        hint:
+          "(with / of / for)"
+      },
+
+      {
+        prompt:
+          "________ planning certainty before acquisition can reduce execution risk.",
+
+        answers: [
+          "Obtaining"
+        ],
+
+        hint:
+          "(Obtaining / Obtain / Obtained)"
+      },
+
+      {
+        prompt:
+          "The difficulty lies ________ securing a viable acquisition price.",
+
+        answers: [
+          "in"
+        ],
+
+        hint:
+          "(on / in / at)"
+      },
+
+      {
+        prompt:
+          "Greater density does not necessarily ________ that a project is viable.",
+
+        answers: [
+          "mean"
+        ],
+
+        hint:
+          "(means / meaning / mean)"
+      },
+
+      {
+        prompt:
+          "The scheme ________ become viable if acquisition costs were lower.",
+
+        answers: [
+          "might"
+        ],
+
+        hint:
+          "(might / must / does)"
+      },
+
+      {
+        prompt:
+          "The development potential ________ the site has increased following the rezoning.",
+
+        answers: [
+          "of"
+        ],
+
+        hint:
+          "(for / at / of)"
+      },
+
+      {
+        prompt:
+          "________ able to build more does not guarantee a higher return.",
+
+        answers: [
+          "Being"
+        ],
+
+        hint:
+          "(Be / Being / Been)"
+      },
+
+      {
+        prompt:
+          "Demand ________ housing remains strong in many parts of the city.",
+
+        answers: [
+          "for"
+        ],
+
+        hint:
+          "(for / of / to)"
+      },
+
+      {
+        prompt:
+          "The project appears ________ offer considerable upside, subject to planning and cost assumptions.",
+
+        answers: [
+          "to"
+        ],
+
+        hint:
+          "(for / to / at)"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 18A — HIGH SCORE
+  // ============================================================
+
+  scene17_high: {
+    type: "text",
+
+    text:
+      "INVESTMENT COMMITTEE CLEARED\n\n" +
+      "Strong run.\n\n" +
+      "You moved between zoning, acquisition, development viability and investment language while keeping the grammar precise.\n\n" +
+      "Final question for discussion:\n\n" +
+      "After everything you have seen today, which market would you personally rather acquire land in — Madrid or San Francisco — and why?",
+
+    choices: [
+      {
+        text: "Finish",
+        next: "scene18_end"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 18B — MEDIUM SCORE
+  // ============================================================
+
+  scene17_medium: {
+    type: "text",
+
+    text:
+      "INVESTMENT COMMITTEE CLEARED\n\n" +
+      "Good result.\n\n" +
+      "A few of the smaller grammatical choices still need attention — particularly preposition combinations and gerund structures.\n\n" +
+      "Final question:\n\n" +
+      "After everything you have seen today, which market would you personally rather acquire land in — Madrid or San Francisco — and why?",
+
+    choices: [
+      {
+        text: "Finish",
+        next: "scene18_end"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 18C — RETRY
+  // ============================================================
+
+  scene17_retry: {
+    type: "text",
+
+    text:
+      "QUICK RESET\n\n" +
+      "Watch the small combinations:\n\n" +
+      "• restrictions ON\n" +
+      "• demand FOR\n" +
+      "• account FOR\n" +
+      "• development potential OF\n" +
+      "• lies IN + -ing\n" +
+      "• obtaining / securing / being as gerund structures\n\n" +
+      "The questions will be reshuffled when you run them again.",
+
+    choices: [
+      {
+        text: "Retry Grammar Run",
+        next: "scene16_grammar_run"
+      }
+    ]
+  },
+
+
+  // ============================================================
+  // 19 — END
+  // ============================================================
+
+  scene18_end: {
+    type: "text",
+
+    text:
+      "SAN FRANCISCO BRIEFING COMPLETE\n\n" +
+      "Key language carried forward:\n\n" +
+      "• zoning restrictions\n" +
+      "• permitted density\n" +
+      "• planning certainty\n" +
+      "• development potential\n" +
+      "• acquisition costs\n" +
+      "• financial viability\n" +
+      "• execution risk\n" +
+      "• account for\n" +
+      "• demand for\n" +
+      "• restrictions on\n\n" +
+      "Next briefing: another market, another problem.",
+
+    choices: []
   }
 
 };
